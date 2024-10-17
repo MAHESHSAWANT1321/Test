@@ -1,2 +1,204 @@
-git add .
-git commit -m "insted of this two command"
+Git Basic Commands:
+-git commands
+-git init
+-git status
+-git config
+-git add .
+-git commit
+-git commit -a -m "git add . and git commit in a singel comamd"
+-git log
+-git push
+-git push origin TestBranch:master
+--------------------------------------------------------------------------
+Git Diffrence comanads:comparing the files in version control system.
+To compaire the file contens between working directory bitween staging area between staging area between local Repository between Remote Repository using git differnce command. 
+
+workin directory--->staging area--->local Repository--->Remote Repository.
+
+ 1:index.txt:create one file add singel line code.
+ 	-add this singel line code into staging area.
+	like	animal
+ 2:to add some code of line in same line.
+	this is a updated code. or new code is added.
+	like animal Birds
+
+Requirements 1: To see difference in file content between Working Directory and Staging Area.
+=>git diff index.txt
+diff --git a/index.txt b/index.txt
+index 4734a6a..26950e3 100644
+--- a/index.txt
++++ b/index.txt
+@@ -1 +1,2 @@
+-animal
+\ No newline at end of file
++animal
++Birds
+\ No newline at end of file
+a & b =>represent the source and destination here
+
+a/index.txt =>represent source (staging area)
+b/index.txt =>represent destination (working directory)
+
+4734a6a =>Hash of file content from source/staging.
+26950e3 =>Hash of file containt from the destination/working directory.
+100644  =>representing the git file mode
+	it having containce the two part
+		100 =>first three digit represent are the type of file.
+		644 =>last three digit represent are the file permitions.(6-rw 4-r 4-r)\
+
+--- a/index.txt =>source file missing some lines (staging area).
++++ b/index.txt =>new lines added in destination file (working directory).
+
+if anyline prifixed with space means it is unchanged.
+if anyline prifixed with + means it is added in destination copy.
+if anyline prifixed with - means it is removed from destination copy.
+
+Explainations :
+
+The output from the git diff command is showing the changes made to a file called index.txt between two versions (before and after the change).
+
+Here's a breakdown of the changes:
+
+The line -animal (with a minus sign) indicates that this is the content of the file before the change.
+The line +animal (with a plus sign) shows that the word "animal" is still present after the change, meaning it hasn't been modified.
+The new line +Birds (with a plus sign) is added to the file. This is the new content introduced.
+\ No newline at end of file means that, in both versions, the file doesn't have an empty line at the very end.
+In summary, the file originally had the word "animal" on one line, and now it has "animal" and "Birds" on two lines.
+
+
+
+Requirment 2:To see the diffrence between in file between Working directory and Local Repository/last Commit. 
+Last commit always referred using HEAD key word it refered to the local repository.
+
+git diff HEAD index.txt =>This command represent diffrence between HEAD means Local repository or last commited code file.
+
+diff --git a/index.txt b/index.txt
+index 4734a6a..c3f6d12 100644
+--- a/index.txt
++++ b/index.txt
+@@ -1 +1,3 @@
+-animal
+\ No newline at end of file
++animal
++Birds
++Fishes
+\ No newline at end of file
+
+
+ Explainations:
+
+This git diff HEAD index.txt command shows the difference between the current state of your index.txt file and the latest commit (referred to as HEAD).
+
+Here's a simple explanation of the changes:
+
+Before the change (-animal): The file originally had only the word "animal" on a single line.
+After the change (+animal): The word "animal" is still present, so this line remains unchanged.
+New lines added:
++Birds: The word "Birds" has been added to a new line.
++Fishes: The word "Fishes" has also been added as another new line.
+No newline at end of file: This message means that, even after these additions, there is still no blank line at the very end of the file.
+In summary, you added two new lines to the file—"Birds" and "Fishes"—while keeping the original "animal" line intact.
+
+
+Requirement 3:To see the diffrence in file content between staged Copy and locale Repository/Last Commit.
+
+git diff --staged HEAD index.txt : =>to compaire staging file into Locale repository.
+
+
+diff --git a/index.txt b/index.txt
+index 4734a6a..c3f6d12 100644
+--- a/index.txt
++++ b/index.txt
+@@ -1 +1,3 @@
+-animal
+\ No newline at end of file
++animal
++Birds
++Fishes
+\ No newline at end of file
+
+Explaination:
+The git diff --staged HEAD index.txt command compares the changes that have been staged for the next commit with the latest commit (referred to as HEAD).
+
+Here's what the output means:
+
+Before the change (-animal): The file initially had only the word "animal" on one line.
+After the change (+animal): The word "animal" is still present, unchanged.
+New lines added:
++Birds: The word "Birds" has been added as a new line.
++Fishes: The word "Fishes" has been added as another new line.
+No newline at end of file: This message indicates that even after the changes, there is no blank line at the end of the file.
+In summary, the changes you've staged for the next commit include adding the words "Birds" and "Fishes" to the index.txt file, while keeping the original word "animal" unchanged.
+
+Requirements 4:To see diffrence between in file content between specific Commit and Working Directory Copy.
+we can do this using commit ID.(like 2c2ce443ad23ae006d9739bf5c4098598e4e2d5c )
+
+git log --oneline =>To get the all Commit ID.
+
+git diff de68291  index.txt
+
+diff --git a/index.txt b/index.txt
+index 4734a6a..a328c1a 100644
+--- a/index.txt
++++ b/index.txt
+@@ -1 +1,4 @@
+-animal
+\ No newline at end of file
++animal
++Birds
++Fishes
++trees
+\ No newline at end of file
+
+
+Explaination:
+The git diff de68291 index.txt command compares the state of the index.txt file at the commit de68291 to the current state of the file.
+
+Here's what the output means:
+
+Before the change (-animal): In the commit de68291, the file only had the word "animal" on a single line.
+After the change (+animal): The word "animal" is still present, so it hasn't been modified.
+New lines added:
++Birds: The word "Birds" has been added to the file.
++Fishes: The word "Fishes" has been added to the file.
++trees: The word "trees" has also been added as a new line.
+No newline at end of file: The message indicates that there is no blank line at the end of the file, even after the additions.
+In summary, since the commit de68291, three new lines have been added to the index.txt file: "Birds", "Fishes", and "trees", while the original line "animal" remains unchanged.
+
+Requirment 5:To see diffrence in file content between specific commit and staging area copy.
+
+
+git diff --staged de68291 
+
+
+$ git diff --staged de68291
+diff --git a/index.txt b/index.txt
+index 4734a6a..a328c1a 100644
+--- a/index.txt
++++ b/index.txt
+@@ -1 +1,4 @@
+-animal
+\ No newline at end of file
++animal
++Birds
++Fishes
++trees
+\ No newline at end of file
+
+
+Explaination:
+The git diff --staged de68291 command shows the difference between the staged changes and the state of the file at the commit de68291.
+
+Here's what the output tells us:
+
+Before the change (-animal): In the commit de68291, the file only had one line with the word "animal."
+After the change (+animal): The word "animal" is still present, so it's unchanged.
+New lines added:
++Birds: The word "Birds" has been added.
++Fishes: The word "Fishes" has been added.
++trees: The word "trees" has been added as well.
+No newline at end of file: This means that the file still does not have a blank line at the end, even after the new content was added.
+In summary, the changes you've staged for the next commit include adding the words "Birds," "Fishes," and "trees" to the index.txt file, while the original "animal" line remains untouched. This is the difference compared to the state of the file in commit de68291.
+
+
+ 
