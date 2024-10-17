@@ -1,1 +1,1 @@
-Hi sai
+git commit -a m "Both file are commited"

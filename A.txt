@@ -1,1 +1,2 @@
-HI 
+git add .
+git commit -m "insted of this two command"
