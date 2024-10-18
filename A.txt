@@ -205,6 +205,128 @@ Requirement 6:To see diffrence between two specified commit.
 git diff de68291 f31baaa index.txt.
 
 -----------------------------------------------------------------------------------
+git rm command in git:
+how we can remove or delete the file in working director or staging area.
+we have three files: 
+file1.txt
+file2.txt
+file3.txt
+
+1: git ls-files:this command show you how much file added in staging area.
+
+scenario 1:Remove files from both staging and working directory.
+comman:	git rm file 1.txt
+	this command remove file from working directory and staging area both.
+
+scenario 2:Remove all files from both staging area and working directory both.
+command: git rm -r .
+	 remove all files from both working directory  and staging area.
+
+scenario 3:Remove file only fron staging area not from the working directory.
+command:  git rm --cached file2.txt
+	  this comman remove file2 from the staging area not from working directory.
+
+scenario 4:Remove file from working directory not from staging directory.
+command:rm file3.txt
+	this is a linux comman to remove file from working directory not from staging area.
+
+-----------------------------------------------------------------------------------
+Git checkout commands:
+we can used checkout command to discard unstaged changes in the tracked files of working directory.
+
+what is Tracked file?
+=>A tracked file in Git is a file that file atlest add to staging and local repository. are known as Tracked file.
+
+what is Unstaged changes?
+=>The file havinng changes but Those changes or not part of the staging area.means thos changes withch is not part of the staging area.called as Unstaged changes.
+
+There are three stages:
+1: Only for working diectory.
+2: To discard unstaged changes(The changes which are not added to staging area)
+3: In the tracked files (The files which are already added to staging area/commit).
+
+command:git checkout -- file1.txt
+
+command: cat file1.txt 
+	 this comman for you seethe containt of file.
+
+----------------------------------------------------------------------
+Git reset command:
+1: To remove changes from staging area.
+2: To undo commits at repository level.
+
+scenario1:To remove changes from staging area.
+command: git reset index.txt
+         this is a exactly aposite to git add . commans
+
+----------------------------------------------------------------------------
+Scenario2: To undo commits at repository level.
+syntax:  git reset <mode> <commit ID>
+
+Moves the HEAD to the specified commite and all remaing recent commit 
+will be removed.
+
+Mode will decied whether these changes are going to remove from staging area and working directory ot not.
+Manly we use three mode:
+	1: --mixed
+	2: --soft
+	3: --hard
+
+In working directory and staging area toking about the files but in repository we dont toking about the files insted of file we can say commites.	
+
+
+1: reset with --mixed Mode:
+	It is the default mode.
+	To descard commit\s in the local repository and to descard changes on 	staging area we  	should use with --mixed option.
+	It will not toch working directory.
+
+command: git reset --mixed 4a5ad43 
+	Jo ID ham de rahe ahi uske ageke jo bhi commits honge wo sab remove ho jayenge. is --mixed  	mode mai.
+
+
+2: reset with --soft Options:
+	It is a exactly same as a --miexd option,but changes are available in working directory as a 	well as in staging area.
+	It wont touch staging area and working directory.
+	As changes already present in staging area, just we have to use commit to revert back.
+command: git reset --soft 64dd7bc
+	 when we give first commit ID the above all second and thared commit will be discard in only 	local repository not in staging and working directory.
+
+
+3: reset with --hard Option:
+	It is a exactly same as a --mixed except that changes will be removed from everyone(local 	repositotry, staging area and working directolry).
+	It is a Imposible to revert back nad hency while using hard reset we have to take special  	care.
+command: git reset --hared 64dd7bc
+	 Those file are remvoed permanently.above commited are discarede.
+
+Diffrence between --mixed VS --soft VS --hard?
+1: --mixed:
+	Change will be discarded in local repo and staging area.
+	It won't touch working directopy.
+	Working tree won't be clean.
+	But we can revert with 
+		git add .
+		git commit
+
+2:--soft:
+	Change will be discard only in local repository.
+	It won't touch staging area and working directory.
+	Working tree won't be clean.
+	But we can revert with
+		git commit
+
+3: --hard:
+	Change will be descared everywhere.
+	Working tree won't be clean.
+	No way to revert.
+
+
+
+
+
+
+
+
+
 
 
 
