@@ -200,5 +200,12 @@ New lines added:
 No newline at end of file: This means that the file still does not have a blank line at the end, even after the new content was added.
 In summary, the changes you've staged for the next commit include adding the words "Birds," "Fishes," and "trees" to the index.txt file, while the original "animal" line remains untouched. This is the difference compared to the state of the file in commit de68291.
 
+Requirement 6:To see diffrence between two specified commit.
+
+git diff de68291 f31baaa index.txt.
+
+-----------------------------------------------------------------------------------
+
+
 
  
