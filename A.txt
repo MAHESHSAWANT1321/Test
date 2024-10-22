@@ -272,30 +272,40 @@ Manly we use three mode:
 	2: --soft
 	3: --hard
 
-In working directory and staging area toking about the files but in repository we dont toking about the files insted of file we can say commites.	
+In working directory and staging area toking about the files but in local repository we dont toking about the files insted of file we can say commites.
 
+we have three commits 
+like commit1  after
+     commit2  after
+     commit3	
+
+but when we git log
+thst time sequence of commit is like reverse
+commit3 after =>this is a courrent commit
+commit2 after=>this is a second one
+commit1 =>this is a last one.
 
 1: reset with --mixed Mode:
 	It is the default mode.
-	To descard commit\s in the local repository and to descard changes on 	staging area we  	should use with --mixed option.
+	To descard commits in the local repository and to descard changes on staging area we should use with --mixed option.
 	It will not toch working directory.
 
-command: git reset --mixed 4a5ad43 
-	Jo ID ham de rahe ahi uske ageke jo bhi commits honge wo sab remove ho jayenge. is --mixed  	mode mai.
+command: git reset --mixed 4a5ad43  
+	Jo ID ham de rahe ahi uske ageke jo bhi commits honge wo sab remove ho jayenge. is --mixed mode mai.
 
 
 2: reset with --soft Options:
-	It is a exactly same as a --miexd option,but changes are available in working directory as a 	well as in staging area.
+	It is a exactly same as a --miexd option,but changes are available in working directory as a well as in staging area.
 	It wont touch staging area and working directory.
 	As changes already present in staging area, just we have to use commit to revert back.
 command: git reset --soft 64dd7bc
-	 when we give first commit ID the above all second and thared commit will be discard in only 	local repository not in staging and working directory.
+	 when we give first commit ID the above all second and thared commit will be discard in only local repository not in staging and working directory.
 
 
 3: reset with --hard Option:
-	It is a exactly same as a --mixed except that changes will be removed from everyone(local 	repositotry, staging area and working directolry).
-	It is a Imposible to revert back nad hency while using hard reset we have to take special  	care.
-command: git reset --hared 64dd7bc
+	It is a exactly same as a --mixed except that changes will be removed from everyone(local repositotry, staging area and working directolry).
+	It is a Imposible to revert back and hency while using hard reset we have to take special care.
+command: git reset --hard 64dd7bc
 	 Those file are remvoed permanently.above commited are discarede.
 
 Diffrence between --mixed VS --soft VS --hard?
@@ -320,6 +330,601 @@ Diffrence between --mixed VS --soft VS --hard?
 	No way to revert.
 
 
+----------------------------------------------------------------------------------
+Git branching:
+
+* =>Representing in active branche
+
+1: To view available branches on repository.
+	git branch
+
+2: To see current branch(on master branch).
+	git status
+
+3: Create new branche:
+	git branch branch_Name
+  	-after createing a new branche to check branch using 
+	git branch command.
+
+4: To switch to from one branch to another branch:
+   git checkout  ==>discard unstaged changes in working directory.
+	git checkout branch_name
+
+   To check branche is switch or not use git branch command
+   To see the all file which is inherited from the main/master branche is present        in created branch use below command
+	 git ls-files 
+
+Creating and switching to branch:
+	git checkout -b branch_name
+To check branche is created and switch or not use 
+	git branch command
+   To see the all file which is inherited from the main/master branche is present        in created branch use below command
+	 git ls-files
+
+NOTE:when we create new file in master and those are staged file which are not affected in other chiled branch.
+when we switch on chile branch and create one new file those file are not affected
+on a master banch.
+
+After doing some changes in chile branche file those changes we will marge into the main/master branches.
+
+All branches are the isolated means each branch is independent.
+-----------------------------------------------------------------------
+	
+Git merge command :
+-create a new project
+	test
+-open git bash
+	right click in that project and click on open git bash
+
+-initilize git in that project
+	git init
+
+-create some file 
+	touch a.txt b.txt
+
+-add those file into staging and commit them to local repository.
+	git add a.txt; git commit -m"a.txt commited"
+	git add b.txt; git commit-m"b.txt commited"
+
+-to check commit
+	git log --oneline
+
+-create a new branch
+	git branch feature
+
+-lets check branche is created
+	git branch
+	but currently we are on master branch
+
+-to switch branch
+	git checkout feature
+
+-lets check branche is switch or not
+	git branch
+	now currently we are on feature bramnch
+
+-Now we are creating two file in feature branch
+	touch x.txt y.txt
+
+-add those file in staging area and commit them to local repo
+	git add x.txt; git commit -m"C1F"
+	git add y.txt; git commit -m"C2F"
+
+-to check commited file
+	git log --oneline
+	so totally we have four commit are ther.two from the master and two for the feature.
+
+*How we can doing merging concepts here:
+-we want to merge feature branch code with master branch.
+-we want to switch from feature branch to master branch first.
+	git checkout master
+
+-to check switch or not
+	git branch
+
+-to merge frature branch to master branch
+	git merge feature
+ we can get some output here:-
+	Updating f82ac8c..4a0447e
+ 1:Fast-forward
+ 	x.txt | 0
+ 	y.txt | 0
+ 	2 files changed, 0 insertions(+), 0 deletions(-)
+ 	create mode 100644 x.txt
+ 	create mode 100644 y.txt
+
+-to check how much file in master branch after commit feature branch file will be added in master.
+	git ls-files
+	
+	a.txt
+	b.txt
+	x.txt
+	y.txt
+------------------------------------------------------------------------------------
+2:Three way merge:
+
+-create a new project
+	Test
+
+-initilize git to the project
+	git init
+
+-create some file in master
+	touch a.txt b.txt
+
+-add this file to staging or local repository.
+	git add a.txt; git commit -m"C1M"
+	git add b.txt; git commit -m"C2M"
+
+-to check commited file
+	git log --oneline
+
+-to create a new branch
+	git branche feature
+
+-To check branch is created or not
+	git branch
+
+-to switch on feature branch
+	git checkout feature
+
+-create some files in feature branch
+	touch x.txt y.txt
+-lets check fule is created or not 
+	git ls-files
+
+-add those file in staging or local repository
+	git add x.txt; git commit -m"C1F"
+	git add y.txt; git commit -m"C2F"
+
+-to check commited file and head of thye file is
+	git log --oneline
+	we can see in feature brancg last commit C2F is the HEAD.
+
+*IMP=>
+-switch to master file
+	git checkout master
+
+-see branch is changed or not
+	git branch
+
+-see the file of master branch
+	git ls-files
+	currently we are in two files in master.
+
+-let me check previous commits in mastre branch
+	git log --oneline
+	now we will have 
+	master -=> 2 commits and 2 files.
+	feature => 4 commits and 4 files
+
+-create a new commit in master branch
+	touch c.txt
+
+-lets check it's create or not
+	git ls-fies
+	master => 3 commits 3 files
+	feature => 4 commits 4 files
+
+-to add this newly created file in a staging area and local repository.
+	git add c.txt; git commit -m"C3M"
+
+-to check the all commits in master branch
+	git log --oneline
+	there are three commits are there and latest commit or HEAD is C3M 
+*IMP---------------------------------------------------------------
+To merge feature branch files into the master branch
+
+-to check currently we are in master branch
+	git branch
+	if you are on a master branch the switch the branch using
+	git checkout master 
+
+-to mearg feature branch into master
+	git merge feature
+	see diffrent type of editor because its a three way commit.
+
+-to back to bash enter 
+	:wq!
+
+-we can get the output is;
+Merge made by the 'ort' strategy.(three way merge is called recursive strategy)
+ x.txt | 0
+ y.txt | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 x.txt
+ create mode 100644 y.txt
+
+-after commited git create selfe commit that is a head to see 
+	git log --oneline
+
+8d81c46 (HEAD -> master) Merge branch 'feature'(this is a new commit from the git self after merge feature branch into master branch). HEAD->master pointer aqlways point to the new created commit.
+d4b5dfa C3M
+e46cda0 (feature) C2F
+7cbe4e4 C1F
+b34f845 C2M
+402fcb3 C1M
+
+
+Here no create confilect beacuse we cant modify the fies we juct create a new file in master branch ater createing and adding the feature branch.
+
+
+---------------------------------------------------------------------------
+Resolve Merge Conflicts:
+
+-create the new project
+	git Conflict
+
+-to open that project in git bash
+
+-To initilize git on that projets:
+	git init
+
+-To create file in mastre branch using linux comman
+	vim text.txt
+
+-let's check file is created or not:
+	ls
+-create one file using linux comman
+	vim Test.txt
+
+-to add some line in this file 
+	type insert word and enter some line
+	"This is a my first line code"
+
+	control + c =>back from insert
+
+	after that type
+	:wq! => for back to git bash  window from the linux window.
+
+-to see code or line of file or content of file:
+	cat Test.txt
+
+-to add file staging and local repository:
+	git add Test.txt; git commit -m"MC1"
+
+-after that we add some more line in same file:
+	 vim Test.txt => oprn file
+
+-type ins=>to open insert windo
+
+-to control + c
+	to remove insert mode.
+
+-after that 
+	:wq! =>to back to git bash window fron linux 
+
+-to check content of file
+	cat Test.txt
+
+-to commit newly added line:
+	git add Test.txt; git commit -m"MC2"
+
+-to se how many commit in master branch:
+	git log --oneline
+
+-To create feature branch
+	git branch feature
+
+-To switch feature branch
+	git checkout feature
+
+-To see file in feature branch:
+	git ls-files
+	inherit from master branch.
+
+-To see how many commit in feature branch which is inherited from the mastre branch:
+	git log --oneline
+
+-To update the file whcihe is inherited from the master branch means test.txt file will modified.
+	 vim test.txt
+
+-add some line of code:
+	this is a thared line of code addeed from feature branch.
+
+-type ins=>insert mode will be on
+	add some line of code
+
+-type control + c to stope insert mode.
+
+-type :wq!=>switch git bash window
+
+-To see code is added or not:
+	cat test.txt.
+
+-To add this file to staging or local repo and commit this file
+	git add test.txt; git commit -m"FC1"
+
+-To see how much commits in feature branch:
+	git log --oneline
+
+-To switch again master branch:
+	git checkout master
+
+-To add new line in Test.txt in master branch
+	vim text.txt
+	 
+	type-ins =>insert on
+
+-To add some new code line
+
+-To back to git bash => :wq!
+
+-To add this new commit in staging or local repo:
+	git add test.txt; git commit -m"MC2"
+
+-to check the commint:
+	git log --oneline
+
+*We want to merge featcure branch into master branch lets see:
+	git merge feature
+
+Output:
+Auto-merging test.txt
+CONFLICT (content): Merge conflict in test.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+*How we resolve the conflict:
+
+-after run merging command :
+-check content of file using :
+	cat test.txt
+
+CONTENT:
+This is a first line code
+This is a second line code
+<<<<<<< HEAD
+This is a thared line code
+
+=======
+This is a thared line of code update from the feature branch
+>>>>>>> feature
+
+open file:
+	vim test.txt
+
+Clearly see file content is conflict:
+This is a first line code
+This is a second line code
+<<<<<<< HEAD
+This is a thared line code
+
+=======
+This is a thared line of code update from the feature branch
+>>>>>>> feature
+
+As a Developer:
+
+1: we want to have both lines.
+	developer delete unwanted lines.
+
+In linux comman:
+	goto that line and press dd(delete line)
+
+after that:
+	:wq!
+
+now see content of file:
+	cat test.txt.
+	we have four line
+
+after resolving conflict after resolving conflict code to be added to staging and master branch:
+	git add test.txt; git commit -m"merge commit from the git"
+
+-to see how many commit are there in master branch:
+	git log --oneline
+
+Output :
+2456c9e (HEAD -> master) merge commit
+4a54704 MC2
+b49c73a (feature) FC1
+06494bb MC2
+4270dff MC1
+
+we want to see graphical view :
+	git log --oneline --graph
+
+graphical view:
+*   2456c9e (HEAD -> master) merge commit
+|\
+| * b49c73a (feature) FC1
+* | 4a54704 MC2
+|/
+* 06494bb MC2
+* 4270dff MC1
+
+NOTE:
+-after upadating and to removing conflict from the master and feature branch  we merge them to master.
+-so we want to cleaner and well manage code file we deleten the feature branch.
+
+-to remove feature branch :
+	git branch -d feature
+
+-to check branch is delete or not:
+	git branch
+--------------------------------------------------------------------------------
+git rebase command :
+
+To create new projects:
+
+Open git bash inside that project:
+
+Initilize git inside that project:
+	git init
+
+to create some file inside that project
+	touch a.txt b.txt
+
+-to add them to staging a snd commit fro the maqster branch:
+	git add a.txt; git commit -m"C1M"
+	git add b.txt; git commit -m"C2M"
+
+-to see commit:
+	git log --oneline
+
+create a feature branch:
+	git branch feature
+
+switch that branch:
+	git checkout feature
+
+how many branch we have:
+	git branch
+
+create some file in feature branch:
+	touch x.txt y.txt
+
+
+add and commit that feature branch:
+	git add x.txt; git commit -m"C1F"
+	git add y.txt; git commit -m"C2F"
+
+to see all commits:
+	git log --oneline
+
+switch master branch
+	git checkout master
+
+create one more file in master
+	touch c.txt
+
+add to staging ans local repo:
+	git add c.txt; git commit -m"C3M"
+
+to check how much commit in master branch:
+	git log --oneline
+	git log --oneline master
+
+to check how many commit in feature branch:
+	git log --oneline feature
+
+****Rebase command start here:
+steps first:To reabes the feature branch on top of the master branch.(add feature branch on top of matsre branch but commit ID will be changed)
+	git rebase feature
+
+-currentlu we on master branch and we have some commit before rebase:we have three commit.
+	fe9f93d (HEAD -> master) C3M
+	0653039 C2M
+	d9ba0bc C1M
+
+
+In the feature branch we have four commit:
+	b150b5e (feature) C2F
+	4ee7d2e C1F
+	0653039 C2M
+	d9ba0bc C1M
+
+to check branch:
+	git checkout feature
+
+-after rebase lets see what are the commit are there:
+	git log --oneline master
+	still three commit are there:
+	fe9f93d (master) C3M
+	0653039 C2M
+	d9ba0bc C1M
+
+Go to rebase :
+	git rebase master
+	$ git rebase master
+	Successfully rebased and updated refs/heads/feature.
+
+-after reabse check feature branch commit:
+	here is to checnge commit ID to compair before rebase commit ID for feature branch 	and to compair after rebase commit ID for feature branch. Id will be chenged. and 	header also checnged.
+
+	git log --oneline feature
+	fe1767e (HEAD -> feature) C2F
+	ba3fb86 C1F
+	fe9f93d (master) C3M
+	0653039 C2M
+	d9ba0bc C1M
+
+switch to master branch
+	git checkout master
+
+Steps 2: To merge thode commit to master
+	git merge feature
+	-using fast forward merge.
+Output:after rebase we merge thos in master branch
+here no create conflict created.
+Updating fe9f93d..fe1767e
+Fast-forward
+ x.txt | 0
+ y.txt | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 x.txt
+ create mode 100644 y.txt
+
+to check commit in master branch :
+	git log --oneline master
+	          Or
+	git log --oneline --graph
+
+Output:
+* fe1767e (HEAD -> master, feature) C2F
+* ba3fb86 C1F
+* fe9f93d C3M
+* 0653039 C2M
+* d9ba0bc C1M
+
+Here chenge HEAD nas Feature commit after merge.
+* representing the current or master branch.
+-without having any conflict without having any three way merge without creating a sepreat commit we can directly use rebase command.
+-rebase command only work on a local machin becase developer and tester will working on your feature ans your master branch only.
+-but when we working on a remote repository thete are multiple peopel working on multiple branches and there will folows only merging concepts.
+-this is a alternative of the merge commit.
+
+---------------------------------------------------------------------------------------
+GitHub:
+-what is gitHub?
+-Creating gitHub account?
+-How to clone repository from gitHub?
+-How to push code on to remote repository?
+-How to pull code changes from remote repository?
+
+
+----------------------------------------------------------------------
+ How to create git hub account:
+	-go to gitHub oficial website
+	-signUp first
+
+Create account :
+	-UserName
+	-Email
+	-password
+
+click Create account button
+	once you click that button you confirmantion on your email plz 	confirm them.
+
+Once signup is completed : 
+	Then Login using those user name and Password
+
+Then just click on the signin button.
+
+once the sign up in right side you see repository you have created arleeyer :
+
+Remote repo URL: https://github.com/MAHESHSAWANT1321/Testrepo.git
+
+
+-------------------------------------------------------------------
+Git clone:
+
+create new project:
+open git bash in that project:
+git initilize this project
+	git init
+
+to clone repo from remote:
+git clone 'https://github.com/MAHESHSAWANT1321/Testrepo.git'
+
+Cloning into 'Testrepo'...
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (3/3), done.
+
+
+ 
 
 
 
@@ -330,4 +935,58 @@ Diffrence between --mixed VS --soft VS --hard?
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+
+
+
+
+ 
  
